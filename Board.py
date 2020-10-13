@@ -1,4 +1,5 @@
 import random as rand
+from os import system
 from collections import defaultdict
 
 class BoardEnvironment:
@@ -43,7 +44,7 @@ class BoardEnvironment:
     def play_game(self):
         self.reset()
         while( not self.is_full() ):
-
+            system('clear')
             if( not self.current_player ):
                 choice = self.AI.select_action()
             else:
@@ -62,6 +63,7 @@ class BoardEnvironment:
             self.board[choice] = self.turn
 
             if self.winner(self.turn):
+                system('clear')
                 if(self.current_player):
                     print("You won!")
                 else:
@@ -71,6 +73,7 @@ class BoardEnvironment:
 
             self.turn = 'X' if self.turn == 'O' else 'O'
             self.current_player = not self.current_player
+        system('clear')
         self.print_board()
         print("Tie!")
 
@@ -92,7 +95,7 @@ class Agent:
     def __init__(self, environment, difficulty):
         self.environment = environment
         self.Q = ''
-        with open(r'easy.txt', 'r') as f:
+        with open(difficulty, 'r') as f:
             for i in f.readlines():
                 self.Q = i
         self.Q = eval(self.Q)
@@ -112,7 +115,22 @@ class Agent:
         self.past_action = choice
         return choice
 
+def select_difficulty():
+    x = 0
+    diffdict = {1 : r'easy.txt',
+                2 : r'medium.txt',
+                3 : r'hard.txt'}
+    while(x > 3 or x < 1):
+        print("Select a difficulty:")
+        print("1: Easy")
+        print("2: Medium")
+        print("3: Hard")
+        x = int(input())
+
+    return diffdict[x]
+
+system('clear')
 board = BoardEnvironment()
-AI = Agent(board, 'easy.txt')
+AI = Agent(board, select_difficulty())
 board.set_players(AI)
 board.play_game()
