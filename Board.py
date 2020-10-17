@@ -117,9 +117,9 @@ class Agent:
 
 def select_difficulty():
     x = 0
-    diffdict = {1 : r'easy.txt',
-                2 : r'medium.txt',
-                3 : r'hard.txt'}
+    diffdict = {1 : r'easy.txt', #40k games
+                2 : r'medium.txt',#70k games
+                3 : r'hard.txt'} #100k games
     while(x > 3 or x < 1):
         print("Select a difficulty:")
         print("1: Easy")
