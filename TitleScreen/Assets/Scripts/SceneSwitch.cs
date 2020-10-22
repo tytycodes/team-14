@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitch : MonoBehaviour
 {
-    GameObject Button;
     GameController Controller;
+
     public void playGame()
     {
-        Button = GameObject.Find("GameController");
-        Controller = Button.GetComponent<GameController>();
+        Controller = GameObject.Find("GameController").GetComponent<GameController>();
         
+        //Check if the game and or difficulty are selected
         if(Controller.game == -1 || Controller.difficulty == -1)
         {
             UnityEngine.Debug.Log("No game/difficulty selected");
@@ -20,6 +20,12 @@ public class SceneSwitch : MonoBehaviour
         }
 
         //Use Controller.game to load the scene for the corresponding game
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        string SceneName = "";
+        switch (Controller.game)
+        {
+            case (0):   SceneName = "TicTacToe";
+                        break;
+        }
+        SceneManager.LoadScene(SceneName);
     }
 }
