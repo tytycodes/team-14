@@ -51,15 +51,19 @@ class BoardEnvironment:
     temp_board = copy.copy(self.board)
     for col in range(5):
       bottom = self.get_lowest_column(col)
-      temp_board[bottom] = col + 1
+      if(bottom != -1):
+        temp_board[bottom] = col + 1
     self.print_board(temp_board)
 
   def get_lowest_column(self, i):
-    while(i + 5 < 25):
-      if(self.board[i+5] == '-'):
-        i = i + 5
-      else:
-        break
+    if(self.board[i] == '-'):
+      while(i + 5 < 25):
+        if(self.board[i+5] == '-'):
+          i = i + 5
+        else:
+          break
+    else:
+      return -1
     return i
 
   def other_player(self):
@@ -67,7 +71,13 @@ class BoardEnvironment:
     return not self.current_player
 
   def available_actions(self):
-    return [ind for ind, val in enumerate(self.board) if val == '-']
+    movelist = []
+    for i in range(5):
+        if self.board[i] == '-':
+            movelist.append(i)
+        else:
+            continue
+    return movelist
 
   def play_game(self):
     # returns the winning player or None if a tie
@@ -79,11 +89,12 @@ class BoardEnvironment:
       else:
         print("Your board piece is ", self.turn)
         print("Select a board piece from the options below:")
+        movelist = self.available_actions()
         self.print_options()
-        x = input()
-        while(int(x) < 1 or int(x) > 5):
+        x = int(input())
+        while(x < 1 or x > 5 or (x-1) not in movelist):
             print("Invalid choice. Please select another board piece.")
-            x = input()
+            x = int(input())
         print()
         choice = self.get_lowest_column(int(x) - 1)
 
@@ -149,10 +160,12 @@ class Agent:
     represented as strings"""
     def __init__(self, environment, difficulty):
         self.environment = environment
-        self.Q = ''
+        tempdict = ''
         with open(difficulty, 'r') as f:
             for i in f.readlines():
-                self.Q = i
+                tempdict = i
+        tempdict = eval(tempdict)
+        self.Q = defaultdict(lambda: 0.0, tempdict)
         self.reset_past()
 
     def reset_past(self):
@@ -160,16 +173,14 @@ class Agent:
       self.past_state = None
 
     def select_action(self, states):
+      print("AI select")
       available_actions = self.environment.available_actions()
-      if (self.policy == 'random') or (self.policy == 'epsilon' and random.random() < self.epsilon):
-        choice = random.choice(available_actions)
-      else: #self.policy == 'max' or it's an epsilon policy determined to pick the max
-        Q_vals = [self.Q[(self.environment.get_state(), x)] for x in available_actions]
-        #randomly pick one of the maximum values
-        max_val = max(Q_vals) # will often be 0 in the beginning
-        max_pos = [i for i, j in enumerate(Q_vals) if j == max_val]
-        max_indices = [available_actions[x] for x in max_pos]
-        choice = random.choice(max_indices)
+      Q_vals = [self.Q[(self.environment.get_state(), x)] for x in available_actions]
+      #randomly pick one of the maximum values
+      max_val = max(Q_vals) # will often be 0 in the beginning
+      max_pos = [i for i, j in enumerate(Q_vals) if j == max_val]
+      max_indices = [available_actions[x] for x in max_pos]
+      choice = random.choice(max_indices)
       self.past_state = self.environment.get_state()
       self.past_action = choice
 
