@@ -20,6 +20,8 @@ class BoardEnvironment:
         else:
             self.current_player = False
 
+        return self.current_player
+
     def print_board(self, board_string = None):
         if not board_string:
             B = self.board
@@ -38,7 +40,7 @@ class BoardEnvironment:
     def other_player(self):
         return not self.current_player
 
-    def available_actions(self):
+    def available_actions(self, first):
         return [ind for ind, val in enumerate(self.board) if val == '-']
 
     def play_game(self):
@@ -46,10 +48,10 @@ class BoardEnvironment:
         while( not self.is_full() ):
             system('clear')
             if( not self.current_player ):
-                choice = self.AI.select_action()
+                choice = self.AI.select_action(None)
             else:
                 self.print_board()
-                choices = self.available_actions()
+                choices = self.available_actions(None)
                 print("Select your space to play. Your pieces are", self.turn + '.', "Current choices are")
                 print(list(x+1 for x in choices))
                 choice = 10
@@ -92,45 +94,193 @@ class BoardEnvironment:
         return('-' not in self.board)
 
 class Agent:
-    def __init__(self, environment, difficulty):
+    def __init__(self, environment, difficulty, policy = 'max'):
         self.environment = environment
+        self.policy = policy
         self.Q = ''
-        with open(difficulty, 'r') as f:
-            for i in f.readlines():
-                self.Q = i
-        self.Q = eval(self.Q)
+        if policy == 'max':
+            with open(difficulty, 'r') as f:
+                for i in f.readlines():
+                    self.Q = i
+            self.Q = eval(self.Q)
+        self.Q = defaultdict(lambda: 0.0, self.Q)
+        self.reset_past()
 
     def reset_past(self):
         self.past_action = None
         self.past_state = None
 
-    def select_action(self):
-        available_actions = self.environment.available_actions()
-        Q_vals = [self.Q[(self.environment.get_state(), x)] for x in available_actions]
-        max_val = max(Q_vals)
-        max_pos = [i for i, j in enumerate(Q_vals) if j == max_val]
-        max_indices = [available_actions[x] for x in max_pos]
-        choice = rand.choice(max_indices)
+    def select_action(self, first):
+        available_actions = self.environment.available_actions(first)
+        if(self.policy == 'random'):
+            choice = rand.choice(available_actions)
+        else:
+            Q_vals = [self.Q[(self.environment.get_state(), x)] for x in available_actions]
+            max_val = max(Q_vals)
+            max_pos = [i for i, j in enumerate(Q_vals) if j == max_val]
+            max_indices = [available_actions[x] for x in max_pos]
+            choice = rand.choice(max_indices)
         self.past_state = self.environment.get_state()
         self.past_action = choice
         return choice
 
-def select_difficulty():
+class LeagueEnvironment:
+    def __init__(self, board_environment):
+        self.board = board_environment    
+
+    def set_players(self, player_names, league_agents, board_agents):
+        self.player_names = player_names
+        self.league_agents = league_agents
+        self.board_agents = board_agents
+        assert(len(player_names) == len(league_agents) == len(board_agents) )
+        self.num_players = len(player_names)
+
+    def reset_pair(self):
+        # randomly select 2 players
+        player_indices = list(range(self.num_players))
+        self.Ai = rand.choice(player_indices)
+        self.board.set_players(self.board_agents[self.Ai])
+        self.first = self.board.reset()
+        self.league_agents[self.Ai].reset_past()
+        self.A_wins = 0;
+        self.A_chips=100;
+        self.Player_wins = 0;
+        self.Player_chips=100;
+        self.ties = 0;
+        self.state_perspective = 'A' # the state in wins/ties/losses for which player
+        self.chip_mul=1
+        self.min_bid=5
+        self.game_counter=1
+
+    def get_state(self):  ### how to tell who is calling get_state?
+        return (self.A_chips,self.A_wins,self.ties,self.Player_chips,self.Player_wins,self.player_names[self.Ai],'learning strategy and tactics')
+
+    def pair_games_played(self):
+        return self.A_wins + self.ties + self.B_wins
+
+    def available_actions(self, first):
+        if first:
+            return ['quit','single bet','double bet','triple bet']
+        else:
+            return ['quit','call']
+
+    def play_pair(self):
+        system('clear')
+        self.reset_pair()
+
+        player_choice = ''
+
+        while(True):
+
+            if self.first:
+                player_choice = self.league_choice(True)
+                AI_choice = self.league_agents[self.Ai].select_action(False)
+                print("Opponent chose", AI_choice)
+            else:
+                AI_choice = self.league_agents[self.Ai].select_action(True)
+                player_choice = self.league_choice(False, AI_choice)
+
+            if AI_choice == 'quit' or player_choice == 'quit':
+                break
+            elif AI_choice == 'single bet' or player_choice == 'single bet':
+                self.chip_mul=1
+            elif AI_choice == 'double bet' or player_choice == 'double bet':
+                self.chip_mul=2
+            elif AI_choice == 'triple bet' or player_choice == 'triple bet':
+                self.chip_mul=3
+
+            winner = self.board.play_game()
+            self.first = not self.first
+
+            if winner == True:
+                print("Player wins!")
+                self.Player_wins += 1
+                self.Player_chips += self.min_bid*self.chip_mul
+                self.A_chips -= self.min_bid*self.chip_mul
+            elif winner == False:
+                print("Ai wins!")
+                self.A_wins += 1
+                self.A_chips += self.min_bid*self.chip_mul
+                self.Player_chips -= self.min_bid*self.chip_mul
+            else:
+                self.ties += 1
+
+            if self.A_chips <= 0 or self.Player_chips <= 0:
+                break
+
+        if player_choice == 'quit' or self.Player_chips <= 0:
+            print("Player is no longer playing")
+
+        else:
+            print("Play again? 1 for yes, 0 for no")
+            again = -1
+            while again < 0 or again > 1:
+                again = int(input())
+            if again == 1:
+                self.play_pair()
+            return
+
+
+    def league_choice(self, first, AI_choice = ''):
+        choice_list = self.available_actions(first)
+        i = 0
+        p_input = -1
+        print("You currently have", self.Player_chips, "chips and", self.Player_wins, "wins.")
+        if AI_choice:
+            print("Opponent chose", AI_choice)
+        print('Select a choice from the list:')
+        for choice in choice_list:
+            print(i, choice)
+            i += 1
+        while p_input < 0 or p_input > len(choice_list):
+            p_input = int(input())
+        return choice_list[p_input]
+
+
+def select_difficulty(select = False):
     x = 0
-    diffdict = {1 : r'easy.txt', #40k games
-                2 : r'medium.txt',#70k games
-                3 : r'hard.txt'} #100k games
-    while(x > 3 or x < 1):
-        print("Select a difficulty:")
-        print("1: Easy")
-        print("2: Medium")
-        print("3: Hard")
-        x = int(input())
+    diffdict = {1 : r'easy.txt',
+                2 : r'medium.txt',
+                3 : r'hard.txt'}
+    if select:
+        while(x > 3 or x < 1):
+            print("Select a difficulty:")
+            print("1: Easy")
+            print("2: Medium")
+            print("3: Hard")
+            x = int(input())
+    
+    else:
+        x = rand.randint(1, 3)
 
     return diffdict[x]
 
-system('clear')
+#system('clear')
 board = BoardEnvironment()
-AI = Agent(board, select_difficulty())
-board.set_players(AI)
-board.play_game()
+league = LeagueEnvironment(board)
+
+player_names = []
+board_agents = []
+league_agents = []
+
+player_names.append('learning strategy and tactics')
+board_agents.append(Agent(board, select_difficulty(), 'max'))
+league_agents.append(Agent(league, 'league.txt', 'max'))
+
+player_names.append('learning tactics only')
+board_agents.append(Agent(board, select_difficulty(), 'max'))
+league_agents.append(Agent(league, 'league.txt', 'random'))
+
+player_names.append('learning strategy only')
+board_agents.append(Agent(board, select_difficulty(), 'random'))
+league_agents.append(Agent(league, 'league.txt', 'max'))
+
+player_names.append('no learning')
+board_agents.append(Agent(board, select_difficulty(), 'random'))
+league_agents.append(Agent(league, 'league.txt', 'random'))
+
+league.set_players(player_names, league_agents, board_agents)
+league.play_pair()
+
+#board.set_players(AI)
+#board.play_game()
