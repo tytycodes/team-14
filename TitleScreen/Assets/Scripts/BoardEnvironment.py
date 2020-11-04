@@ -5,12 +5,15 @@ class BoardEnvironment():
 	def reset(self):
 		self.turn = 'X'
 		self.board = list('---------')
+		if(rand.random() < 0.5):
+			return True
+		return False
 	def get_state(self):
 		return "".join(self.board)
 	def select_piece(self, choice, turn):
 		self.board[choice] = turn
 		self.turn = 'X' if (turn == 'O') else 'O'
-	def available_actions(self):
+	def available_actions(self, first):
 		return [ind for ind, val in enumerate(self.board) if val == '-']				
 	def check_win(self):
 		if self.winner(self.turn):

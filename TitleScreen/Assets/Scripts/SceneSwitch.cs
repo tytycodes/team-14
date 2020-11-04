@@ -13,15 +13,15 @@ public class SceneSwitch : MonoBehaviour
         Controller = GameObject.Find("GameController").GetComponent<GameController>();
         
         //Check if the game and or difficulty are selected
-        if(Controller.game == -1 || Controller.difficulty == -1)
+        if(Controller.getGame() == -1 || (Controller.getDifficulty() == -1 && Controller.getGameMode() == 0))
         {
             UnityEngine.Debug.Log("No game/difficulty selected");
             return;
         }
 
-        //Use Controller.game to load the scene for the corresponding game
+        //Use Controller.getGame() to load the scene for the corresponding game
         string SceneName = "";
-        switch (Controller.game)
+        switch (Controller.getGame())
         {
             case (0):   SceneName = "TicTacToe";
                         break;
