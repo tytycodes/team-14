@@ -874,10 +874,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTurn: 0
+  leagueChoice: 0
   turnCount: 0
-  game: 0
-  difficulty: 0
-  gamemode: 0
+  currBet: 0
+  AIChips: 0
+  AIWins: 0
+  PlayerChips: 0
+  PlayerWins: 0
+  ties: 0
+  chip_mul: 0
   playerIcon:
   - {fileID: 0}
   - {fileID: 0}
@@ -1189,8 +1194,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 65.5, y: 0}
+  m_SizeDelta: {x: 130.85052, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &584498116
 MonoBehaviour:
@@ -1693,7 +1698,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015259, y: -0.070007}
+  m_AnchoredPosition: {x: -0.000015258789, y: -0.070007}
   m_SizeDelta: {x: 132.98662, y: 43.203403}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1252124507

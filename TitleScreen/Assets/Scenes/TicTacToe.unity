@@ -992,8 +992,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTurn: 0
+  playerTurn2: 0
   leagueChoice: 0
-  quitFlag: 0
   turnCount: 0
   currBet: 0
   AIChips: 0
@@ -1005,6 +1005,7 @@ MonoBehaviour:
   playerIcon:
   - {fileID: 21300000, guid: e00acb6eba37660408e90d887049c11b, type: 3}
   - {fileID: 21300000, guid: 9f48dcd02f1686942b09499672a8df78, type: 3}
+  playerIcon2: []
   ticTacToeSpace:
   - {fileID: 940877565}
   - {fileID: 1306792108}
@@ -1018,6 +1019,7 @@ MonoBehaviour:
   gameButton: []
   difficultyButton: []
   modeButton: []
+  connectFourSpace: []
 --- !u!4 &425732721
 Transform:
   m_ObjectHideFlags: 0
@@ -3252,7 +3254,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 74
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0

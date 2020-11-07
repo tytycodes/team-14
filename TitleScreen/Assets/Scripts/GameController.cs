@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour
     }
 
     public int playerTurn;
+    public int playerTurn2;
     public bool leagueChoice;
     public int turnCount;
     public int currBet;
@@ -49,10 +50,12 @@ public class GameController : MonoBehaviour
     private UnityEngine.UI.Text pChips;
     private UnityEngine.UI.Text aChips;
     public Sprite[] playerIcon;
+    public Sprite[] playerIcon2;
     public UnityEngine.UI.Button[] ticTacToeSpace;
     public UnityEngine.UI.Button[] gameButton;
     public UnityEngine.UI.Button[] difficultyButton;
     public UnityEngine.UI.Button[] modeButton;
+    public UnityEngine.UI.Button[] connectFourSpace;
 
     private GameObject E;
     private GameObject E_Button;
@@ -451,6 +454,91 @@ public class GameController : MonoBehaviour
             AITurn();
         }
     }
+
+    public void ConnectFourSpace(int cellNumber)
+    {
+        int i;
+        bool placed = false;
+        //Select space
+        if(cellNumber >= 0 && cellNumber <= 4)
+        {
+            i = 4;
+            while (!placed)
+            {
+                if (connectFourSpace[i].IsInteractable())
+                {
+                    connectFourSpace[i].image.sprite = playerIcon2[playerTurn2];
+                    connectFourSpace[i].interactable = false;
+                    placed = true;
+                }
+                i--;
+            }
+        }
+        else if (cellNumber >= 5 && cellNumber <= 9)
+        {
+            i = 9;
+            while (!placed)
+            {
+                if (connectFourSpace[i].IsInteractable())
+                {
+                    connectFourSpace[i].image.sprite = playerIcon2[playerTurn2];
+                    connectFourSpace[i].interactable = false;
+                    placed = true;
+                }
+                i--;
+            }
+        }
+        else if (cellNumber >= 10 && cellNumber <= 14)
+        {
+            i = 14;
+            while (!placed)
+            {
+                if (connectFourSpace[i].IsInteractable())
+                {
+                    connectFourSpace[i].image.sprite = playerIcon2[playerTurn2];
+                    connectFourSpace[i].interactable = false;
+                    placed = true;
+                }
+                i--;
+            }
+        }
+        else if (cellNumber >= 15 && cellNumber <= 19)
+        {
+            i = 19;
+            while (!placed)
+            {
+                if (connectFourSpace[i].IsInteractable())
+                {
+                    connectFourSpace[i].image.sprite = playerIcon2[playerTurn2];
+                    connectFourSpace[i].interactable = false;
+                    placed = true;
+                }
+                i--;
+            }
+        }
+        else if (cellNumber >= 20 && cellNumber <= 24)
+        {
+            i = 24;
+            while (!placed)
+            {
+                if (connectFourSpace[i].IsInteractable())
+                {
+                    connectFourSpace[i].image.sprite = playerIcon2[playerTurn2];
+                    connectFourSpace[i].interactable = false;
+                    placed = true;
+                }
+                i--;
+            }
+        }
+
+        //Set next player's turn
+        playerTurn2++;
+        playerTurn2 %= 2;
+
+        //Select piece in the python script
+        
+    }
+
 
     public void ContinueGame()
     {
