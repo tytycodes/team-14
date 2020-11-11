@@ -134,6 +134,37 @@ public class GameController : MonoBehaviour
                     TicTacToeLeague(); 
                 }
                 break;
+            case ("Connect4"):
+                Grid = GameObject.Find("Grid");
+                Call_Button = GameObject.Find("Button_Call");
+                Single_Button = GameObject.Find("Button_Single");
+                Double_Button = GameObject.Find("Button_Double");
+                Triple_Button = GameObject.Find("Button_Triple");
+                Reset_Button = GameObject.Find("Button_Reset");
+                Quit_Button = GameObject.Find("Button_Quit");
+                Continue_Button = GameObject.Find("Button_Continue");
+                if (gamemode == 0)
+                {
+                    League = null;
+                    HideButtons();
+                    Reset_Button.SetActive(true);
+                    Quit_Button.SetActive(true);
+                    GameObject.Find("PlayerChips").SetActive(false);
+                    GameObject.Find("AIChips").SetActive(false);
+                    Connect4Single();
+                }
+                /*else
+                {
+                    AIChips = 100;
+                    AIWins = 0;
+                    PlayerChips = 100;
+                    PlayerWins = 0;
+                    ties = 0;
+                    currBet = 5;
+                    Reset_Button.SetActive(false);
+                    //Connect4League();
+                }*/
+                break;
             case ("SampleScene"):
                 gameButton[0].interactable = false;
                 game = 0;
@@ -163,15 +194,10 @@ public class GameController : MonoBehaviour
     public void SetTicTacToeBoard()
     {
         //explicitly set the tictactoe spaces. Fails otherwise
-        ticTacToeSpace[0] = GameObject.Find("7").GetComponent<Button>();
-        ticTacToeSpace[1] = GameObject.Find("8").GetComponent<Button>();
-        ticTacToeSpace[2] = GameObject.Find("9").GetComponent<Button>();
-        ticTacToeSpace[3] = GameObject.Find("4").GetComponent<Button>();
-        ticTacToeSpace[4] = GameObject.Find("5").GetComponent<Button>();
-        ticTacToeSpace[5] = GameObject.Find("6").GetComponent<Button>();
-        ticTacToeSpace[6] = GameObject.Find("1").GetComponent<Button>();
-        ticTacToeSpace[7] = GameObject.Find("2").GetComponent<Button>();
-        ticTacToeSpace[8] = GameObject.Find("3").GetComponent<Button>();
+        for(int i = 0; i < 9; i++)
+        {
+            ticTacToeSpace[i] = GameObject.Find(i.ToString()).GetComponent<Button>();
+        }
     }
 
     public void ShowButtons(bool turn)
@@ -214,7 +240,7 @@ public class GameController : MonoBehaviour
         ICollection<string> searchPaths = engine.GetSearchPaths();
 
         //Path to the folder of Agent and BoardEnvironment
-        searchPaths.Add(Application.dataPath + @"\Scripts\");
+        searchPaths.Add(Application.dataPath + @"\Scripts\TicTacToe\");
         //Path to the Python standard library
         searchPaths.Add(Application.dataPath + @"\Plugins\Lib\");
         engine.SetSearchPaths(searchPaths);
@@ -224,19 +250,19 @@ public class GameController : MonoBehaviour
         switch (difficulty)
         {
             case 0:
-                diff = @"\Scripts\easy.txt";
+                diff = @"\Scripts\TicTacToe\easy.txt";
                 break;
             case 1:
-                diff = @"\Scripts\medium.txt";
+                diff = @"\Scripts\TicTacToe\medium.txt";
                 break;
             case 2:
-                diff = @"\Scripts\hard.txt";
+                diff = @"\Scripts\TicTacToe\hard.txt";
                 break;
         }
 
         //load in the python scripts
-        dynamic tempagent = engine.ExecuteFile(Application.dataPath + @"\Scripts\Agent.py");
-        dynamic tempboard = engine.ExecuteFile(Application.dataPath + @"\Scripts\BoardEnvironment.py");
+        dynamic tempagent = engine.ExecuteFile(Application.dataPath + @"\Scripts\TicTacToe\Agent.py");
+        dynamic tempboard = engine.ExecuteFile(Application.dataPath + @"\Scripts\TicTacToe\BoardEnvironment.py");
         Board = tempboard.BoardEnvironment();
         Agent = tempagent.Agent(Board, Application.dataPath + diff);
         TicTacToeSetup();
@@ -264,10 +290,10 @@ public class GameController : MonoBehaviour
                                              0.502f);
             ticTacToeSpace[i].colors = Color1;
         }
-        AITurn();
+        TTT_AITurn();
     }
 
-    public void NewLeagueGame()
+    public void NewTTTLeagueGame()
     {
         PlayerChips = 100;
         AIChips = 100;
@@ -296,10 +322,10 @@ public class GameController : MonoBehaviour
             }
             ListIndex++;
         }
-        PlayLeague();
+        PlayTTTLeague();
     }
 
-    public void PlayLeague()
+    public void PlayTTTLeague()
     {
         if (!leagueChoice)
         {
@@ -350,15 +376,91 @@ public class GameController : MonoBehaviour
 
         League.set_players(Util.get_names(), Util.get_leagues(), Util.get_boards());
 
-        NewLeagueGame();
+        NewTTTLeagueGame();
     }
 
-    void AITurn()
+    void TTT_AITurn()
     {
         //Check if it is the AI's turn
         if (playerTurn == 1)
         {
             TicTacToeButton(Agent.select_action(!leagueChoice));
+        }
+    }
+
+    public void Connect4Single()
+    {
+        var engine = Python.CreateEngine();
+
+        ICollection<string> searchPaths = engine.GetSearchPaths();
+
+        //Path to the folder of Agent and BoardEnvironment
+        searchPaths.Add(Application.dataPath + @"\Scripts\Connect4\");
+        //Path to the Python standard library
+        searchPaths.Add(Application.dataPath + @"\Plugins\Lib\");
+        engine.SetSearchPaths(searchPaths);
+
+        //Load in the difficulty q-table
+        string diff = "";
+        switch (difficulty)
+        {
+            case 0:
+                diff = @"\Scripts\Connect4\easy.txt";
+                break;
+            case 1:
+                diff = @"\Scripts\Connect4\medium.txt";
+                break;
+            case 2:
+                diff = @"\Scripts\Connect4\hard.txt";
+                break;
+        }
+
+        //load in the python scripts
+        dynamic tempagent = engine.ExecuteFile(Application.dataPath + @"\Scripts\Connect4\Agent.py");
+        dynamic tempboard = engine.ExecuteFile(Application.dataPath + @"\Scripts\Connect4\BoardEnvironment.py");
+        Board = tempboard.BoardEnvironment();
+        Agent = tempagent.Agent(Board, Application.dataPath + diff);
+        Connect4Setup();
+    }
+
+    public void Connect4Setup()
+    {
+        Board.reset();
+
+        SetConnect4Board();
+
+        System.Random r = new System.Random();
+        int num = r.Next(1, 100);
+        playerTurn2 = (num > 50) ? 0 : 1;
+        //UnityEngine.Debug.Log(num);
+        turnCount = 0;
+        for (int i = 0; i < connectFourSpace.Length; i++)
+        {
+            connectFourSpace[i].interactable = true;
+            connectFourSpace[i].GetComponent<UnityEngine.UI.Image>().sprite = null;
+            dynamic Color1 = connectFourSpace[i].colors;
+            Color1.disabledColor = new Color(connectFourSpace[i].colors.normalColor.r,
+                                             connectFourSpace[i].colors.normalColor.g,
+                                             connectFourSpace[i].colors.normalColor.b,
+                                             0.502f);
+            connectFourSpace[i].colors = Color1;
+        }
+        C4_AITurn();
+    }
+
+    public void C4_AITurn()
+    {
+        if (playerTurn2 == 1)
+        {
+            ConnectFourSpace(Agent.select_action());
+        }
+    }
+
+    public void SetConnect4Board()
+    {
+        for (int i = 0; i < connectFourSpace.Length; i++)
+        {
+            connectFourSpace[i] = GameObject.Find(i.ToString()).GetComponent<Button>();
         }
     }
 
@@ -433,7 +535,7 @@ public class GameController : MonoBehaviour
                 else
                 {
                     leagueChoice = !leagueChoice;
-                    PlayLeague();
+                    PlayTTTLeague();
                 }
             }
         }
@@ -445,98 +547,61 @@ public class GameController : MonoBehaviour
             {
                 ties++;
                 leagueChoice = !leagueChoice;
-                PlayLeague();
+                PlayTTTLeague();
             }
         }
         else
         {
             //Otherwise, make the next turn
-            AITurn();
+            TTT_AITurn();
         }
     }
 
     public void ConnectFourSpace(int cellNumber)
     {
-        int i;
-        bool placed = false;
-        //Select space
-        if(cellNumber >= 0 && cellNumber <= 4)
-        {
-            i = 4;
-            while (!placed)
-            {
-                if (connectFourSpace[i].IsInteractable())
-                {
-                    connectFourSpace[i].image.sprite = playerIcon2[playerTurn2];
-                    connectFourSpace[i].interactable = false;
-                    placed = true;
-                }
-                i--;
-            }
-        }
-        else if (cellNumber >= 5 && cellNumber <= 9)
-        {
-            i = 9;
-            while (!placed)
-            {
-                if (connectFourSpace[i].IsInteractable())
-                {
-                    connectFourSpace[i].image.sprite = playerIcon2[playerTurn2];
-                    connectFourSpace[i].interactable = false;
-                    placed = true;
-                }
-                i--;
-            }
-        }
-        else if (cellNumber >= 10 && cellNumber <= 14)
-        {
-            i = 14;
-            while (!placed)
-            {
-                if (connectFourSpace[i].IsInteractable())
-                {
-                    connectFourSpace[i].image.sprite = playerIcon2[playerTurn2];
-                    connectFourSpace[i].interactable = false;
-                    placed = true;
-                }
-                i--;
-            }
-        }
-        else if (cellNumber >= 15 && cellNumber <= 19)
-        {
-            i = 19;
-            while (!placed)
-            {
-                if (connectFourSpace[i].IsInteractable())
-                {
-                    connectFourSpace[i].image.sprite = playerIcon2[playerTurn2];
-                    connectFourSpace[i].interactable = false;
-                    placed = true;
-                }
-                i--;
-            }
-        }
-        else if (cellNumber >= 20 && cellNumber <= 24)
-        {
-            i = 24;
-            while (!placed)
-            {
-                if (connectFourSpace[i].IsInteractable())
-                {
-                    connectFourSpace[i].image.sprite = playerIcon2[playerTurn2];
-                    connectFourSpace[i].interactable = false;
-                    placed = true;
-                }
-                i--;
-            }
-        }
+        char choice = playerTurn2 == 0 ? 'X' : 'O';
+        int space = Board.get_lowest_column(cellNumber);
+        Board.select_piece(space, choice);
+        connectFourSpace[space].image.sprite = playerIcon2[playerTurn2];
+        connectFourSpace[space].interactable = false;
 
         //Set next player's turn
         playerTurn2++;
         playerTurn2 %= 2;
 
-        //Select piece in the python script
-        
+        if (Board.winner() != "")
+        {
+            if(playerTurn2 == 1)
+            {
+                UnityEngine.Debug.Log("Player wins!");
+            }
+            else
+            {
+                UnityEngine.Debug.Log("AI wins!");
+            }
+            for (int i = 0; i < 25; i++)
+            {
+                connectFourSpace[i].interactable = false;
+                //Set null sprite images to have 0 alpha to prevent weird box showing up on uninteractable
+                if (connectFourSpace[i].image.sprite == null)
+                {
+                    dynamic Color1 = connectFourSpace[i].colors;
+                    Color1.disabledColor = new Color(connectFourSpace[i].colors.normalColor.r,
+                                                     connectFourSpace[i].colors.normalColor.g,
+                                                     connectFourSpace[i].colors.normalColor.b,
+                                                     0.0f);
+                    connectFourSpace[i].colors = Color1;
+                }
+            }
+        }
+        else if (Board.is_full())
+        {
+            UnityEngine.Debug.Log("Tie!");
+        }
+        else {
+            //Select piece in the python script
+            C4_AITurn();
+        }
     }
 
 
@@ -555,7 +620,7 @@ public class GameController : MonoBehaviour
         //UnityEngine.Debug.Log(cellNumber);
         gameButton[cellNumber].interactable = false;
         game = cellNumber;
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < 2; i++)
         {
             if (i != cellNumber)
             {
