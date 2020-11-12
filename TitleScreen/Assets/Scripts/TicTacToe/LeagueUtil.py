@@ -9,19 +9,19 @@ class LeagueUtil:
 
 		self.player_names.append('learning strategy and tactics')
 		self.board_agents.append(Agent.Agent(board, self.select_difficulty(), 'max'))
-		self.league_agents.append(Agent.Agent(league, 'Assets\Scripts\league.txt', 'max'))
+		self.league_agents.append(Agent.Agent(league, 'Assets\Scripts\TicTacToe\league.txt', 'max'))
 
 		self.player_names.append('learning tactics only')
 		self.board_agents.append(Agent.Agent(board, self.select_difficulty(), 'max'))
-		self.league_agents.append(Agent.Agent(league, 'Assets\Scripts\league.txt', 'random'))
+		self.league_agents.append(Agent.Agent(league, 'Assets\Scripts\TicTacToe\league.txt', 'random'))
 
 		self.player_names.append('learning strategy only')
 		self.board_agents.append(Agent.Agent(board, self.select_difficulty(), 'random'))
-		self.league_agents.append(Agent.Agent(league, 'Assets\Scripts\league.txt', 'max'))
+		self.league_agents.append(Agent.Agent(league, 'Assets\Scripts\TicTacToe\league.txt', 'max'))
 
 		self.player_names.append('no learning')
 		self.board_agents.append(Agent.Agent(board, self.select_difficulty(), 'random'))
-		self.league_agents.append(Agent.Agent(league, 'Assets\Scripts\league.txt', 'random'))
+		self.league_agents.append(Agent.Agent(league, 'Assets\Scripts\TicTacToe\league.txt', 'random'))
 
 	def get_names(self):
 		return self.player_names
@@ -33,9 +33,9 @@ class LeagueUtil:
 		return self.league_agents
 		
 	def select_difficulty(self):
-		diffdict = {1 : r'Assets\Scripts\easy.txt',
-                2 : r'Assets\Scripts\medium.txt',
-                3 : r'Assets\Scripts\hard.txt'}
+		diffdict = {1 : r'Assets\Scripts\TicTacToe\easy.txt',
+                2 : r'Assets\Scripts\TicTacToe\medium.txt',
+                3 : r'Assets\Scripts\TicTacToe\hard.txt'}
 		return diffdict[rand.randint(1,3)]
 		
 	def get_board_agent(self, index):

@@ -327,6 +327,7 @@ public class GameController : MonoBehaviour
 
     public void PlayTTTLeague()
     {
+        bool quit = false;
         if (!leagueChoice)
         {
             string choice = LeagueAgent.select_action(!leagueChoice);
@@ -334,6 +335,7 @@ public class GameController : MonoBehaviour
             {
                 case "quit":
                     UnityEngine.Debug.Log("AI chose " + choice);
+                    quit = true;
                     ContinueGame();
                     break;
                 case "single bet":
@@ -349,6 +351,7 @@ public class GameController : MonoBehaviour
             }
             UnityEngine.Debug.Log("AI chose " + choice);
         }
+        if(!quit)
         ShowButtons(leagueChoice);
     }
 
@@ -359,16 +362,16 @@ public class GameController : MonoBehaviour
         ICollection<string> searchPaths = engine.GetSearchPaths();
 
         //Path to the folder of Agent and BoardEnvironment
-        searchPaths.Add(Application.dataPath + @"\Scripts\");
+        searchPaths.Add(Application.dataPath + @"\Scripts\TicTacToe\");
         //Path to the Python standard library
         searchPaths.Add(Application.dataPath + @"\Plugins\Lib\");
         engine.SetSearchPaths(searchPaths);
 
         //load in the python scripts
-        dynamic tempagent = engine.ExecuteFile(Application.dataPath + @"\Scripts\Agent.py");
-        dynamic tempboard = engine.ExecuteFile(Application.dataPath + @"\Scripts\BoardEnvironment.py");
-        dynamic templeague = engine.ExecuteFile(Application.dataPath + @"\Scripts\LeagueEnvironment.py");
-        dynamic temputil = engine.ExecuteFile(Application.dataPath + @"\Scripts\LeagueUtil.py");
+        dynamic tempagent = engine.ExecuteFile(Application.dataPath + @"\Scripts\TicTacToe\Agent.py");
+        dynamic tempboard = engine.ExecuteFile(Application.dataPath + @"\Scripts\TicTacToe\BoardEnvironment.py");
+        dynamic templeague = engine.ExecuteFile(Application.dataPath + @"\Scripts\TicTacToe\LeagueEnvironment.py");
+        dynamic temputil = engine.ExecuteFile(Application.dataPath + @"\Scripts\TicTacToe\LeagueUtil.py");
 
         Board = tempboard.BoardEnvironment();
         League = templeague.LeagueEnvironment(Board);
