@@ -7,17 +7,21 @@ class BoardEnvironment:
 		self.turn = 'X' # the board always starts with X, regardless of which player
 		# board states are a 42-character representing the state of the board.
 		self.board = list('-------------------------')
+		#randomly decide who goes first
 		if(rand.random() < 0.5):
 			return True
 		return False
+	#return board state
 	def get_state(self):
 		return "".join(self.board)
+	#helper function to show which columns are available for selection
 	def print_options(self):
 		temp_board = copy.copy(self.board)
 		for col in range(5):
 			bottom = self.get_lowest_column(col)
 			if(bottom != -1):
 				temp_board[bottom] = col + 1
+	#return the lowest board piece available for the selected column
 	def get_lowest_column(self, i):
 		if(self.board[i] == '-'):
 			while(i + 5 < 25):
@@ -28,15 +32,18 @@ class BoardEnvironment:
 		else:
 			return -1
 		return i
+	#select the chosen piece at the board level and flip the turn
 	def select_piece(self, choice, turn):
 		self.board[choice] = turn
 		self.turn = 'X' if (turn == 'O') else 'O'
+	#return all of the columns available for selection
 	def available_actions(self, first):
 		movelist = []
 		for i in range(5):
 			if self.board[i] == '-':
 				movelist.append(i)
 		return movelist
+	#determine if there is a winner based on the pre-calculated win states
 	def winner(self, check_for = ['X', 'O']):
 		straight_lines = (
 		(0,1,2,3),
@@ -75,5 +82,6 @@ class BoardEnvironment:
 				if all(x == turn for x in (self.board[i] for i in line)):
 					return turn
 		return '' # if there is no winner
+	#determine if board is full
 	def is_full(self):
 		return('-' not in self.board)

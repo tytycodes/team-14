@@ -8,6 +8,8 @@ class LeagueUtil:
 		self.board_agents = []
 		self.league_agents = []
 		
+		#pre-compute the league Q table to be able to send into functions later without calculating it again.
+		#significantly reduces load time
 		LeagueQ = ''
 		with open('Assets\Scripts\Connect4\league.txt', 'r') as f:
 			for i in f.readlines():
@@ -15,14 +17,16 @@ class LeagueUtil:
 		LeagueQ = eval(LeagueQ)
 		LeagueQ = defaultdict(lambda: 0.0, LeagueQ)
 
+		#pre-compute the available board and league agents. significantly reduces load time
 		MaxTactics = Agent.Agent(board, self.select_difficulty(), 'max')
-		MaxStategy = Agent.Agent(league, 'league', 'max', LeagueQ)
+		MaxStrategy = Agent.Agent(league, 'league', 'max', LeagueQ)
 		RandomTactics = Agent.Agent(board, self.select_difficulty(), 'random')
 		RandomStrategy = Agent.Agent(league, 'league', 'random', LeagueQ)
 		
+		#store all available agents to be randomly chosen later during league play
 		self.player_names.append('learning strategy and tactics')
 		self.board_agents.append(MaxTactics)
-		self.league_agents.append(MaxStategy)
+		self.league_agents.append(MaxStrategy)
 
 		self.player_names.append('learning tactics only')
 		self.board_agents.append(MaxTactics)
@@ -30,7 +34,7 @@ class LeagueUtil:
 
 		self.player_names.append('learning strategy only')
 		self.board_agents.append(RandomTactics)
-		self.league_agents.append(MaxStategy)
+		self.league_agents.append(MaxStrategy)
 
 		self.player_names.append('no learning')
 		self.board_agents.append(RandomTactics)
@@ -45,6 +49,7 @@ class LeagueUtil:
 	def get_leagues(self):
 		return self.league_agents
 		
+	#randomly select the difficulty of board agents
 	def select_difficulty(self):
 		diffdict = {1 : r'Assets\Scripts\Connect4\easy.txt',
                 2 : r'Assets\Scripts\Connect4\medium.txt',

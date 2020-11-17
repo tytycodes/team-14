@@ -7,6 +7,7 @@ class LeagueUtil:
 		self.board_agents = []
 		self.league_agents = []
 
+		#store all AI available for play during league play that will be randomly selected
 		self.player_names.append('learning strategy and tactics')
 		self.board_agents.append(Agent.Agent(board, self.select_difficulty(), 'max'))
 		self.league_agents.append(Agent.Agent(league, 'Assets\Scripts\TicTacToe\league.txt', 'max'))
@@ -32,6 +33,7 @@ class LeagueUtil:
 	def get_leagues(self):
 		return self.league_agents
 		
+	#randomly select the difficulty of the generated AI
 	def select_difficulty(self):
 		diffdict = {1 : r'Assets\Scripts\TicTacToe\easy.txt',
                 2 : r'Assets\Scripts\TicTacToe\medium.txt',
