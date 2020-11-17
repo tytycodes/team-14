@@ -462,51 +462,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fc8eebab9d1cb0418064c007ee16349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTurn: 0
-  playerTurn2: 0
-  leagueChoice: 0
-  turnCount: 0
-  currBet: 0
-  AIChips: 0
-  AIWins: 0
-  PlayerChips: 0
-  PlayerWins: 0
-  ties: 0
-  chip_mul: 0
-  playerIcon: []
-  playerIcon2:
-  - {fileID: 21300000, guid: 527ddf133d0432149a64cc6e6d6b0eba, type: 3}
-  - {fileID: 21300000, guid: ba2c9f171fbba5149a774e17fb713fbb, type: 3}
-  ticTacToeSpace: []
   gameButton: []
   difficultyButton: []
   modeButton: []
-  connectFourSpace:
-  - {fileID: 756698880}
-  - {fileID: 1011096496}
-  - {fileID: 1391620609}
-  - {fileID: 1125101120}
-  - {fileID: 1175367259}
-  - {fileID: 244451360}
-  - {fileID: 2117831671}
-  - {fileID: 1567952681}
-  - {fileID: 2077709260}
-  - {fileID: 554949207}
-  - {fileID: 1032016001}
-  - {fileID: 958192769}
-  - {fileID: 1649816891}
-  - {fileID: 818661100}
-  - {fileID: 594711333}
-  - {fileID: 759016054}
-  - {fileID: 496314831}
-  - {fileID: 1633088486}
-  - {fileID: 2054643336}
-  - {fileID: 1722267484}
-  - {fileID: 1962791958}
-  - {fileID: 2082043038}
-  - {fileID: 482840648}
-  - {fileID: 780899358}
-  - {fileID: 800563020}
 --- !u!4 &113001864
 Transform:
   m_ObjectHideFlags: 0
@@ -758,19 +716,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: TicTacToeButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -899,7 +846,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: setChipMul
         m_Mode: 3
         m_Arguments:
@@ -1232,7 +1179,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: setChipMul
         m_Mode: 3
         m_Arguments:
@@ -1361,7 +1308,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
         m_Mode: 3
         m_Arguments:
@@ -1490,19 +1437,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 8
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: TicTacToeButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1946,7 +1882,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
         m_Mode: 3
         m_Arguments:
@@ -2075,7 +2011,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
         m_Mode: 3
         m_Arguments:
@@ -2204,19 +2140,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: TicTacToeButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2344,19 +2269,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: TicTacToeButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2484,7 +2398,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
         m_Mode: 3
         m_Arguments:
@@ -2613,7 +2527,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
         m_Mode: 3
         m_Arguments:
@@ -2742,7 +2656,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
         m_Mode: 3
         m_Arguments:
@@ -2872,8 +2786,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: NewLeagueGame
+      - m_Target: {fileID: 1982467318}
+        m_MethodName: NewC4LeagueGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3157,7 +3071,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
         m_Mode: 3
         m_Arguments:
@@ -3519,19 +3433,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 5
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: TicTacToeButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3659,19 +3562,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: TicTacToeButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3800,7 +3692,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: CallBet
         m_Mode: 1
         m_Arguments:
@@ -3929,7 +3821,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
         m_Mode: 3
         m_Arguments:
@@ -4058,7 +3950,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
         m_Mode: 3
         m_Arguments:
@@ -4417,7 +4309,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
         m_Mode: 3
         m_Arguments:
@@ -4624,7 +4516,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
         m_Mode: 3
         m_Arguments:
@@ -4753,7 +4645,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
         m_Mode: 3
         m_Arguments:
@@ -4882,7 +4774,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
         m_Mode: 3
         m_Arguments:
@@ -5141,7 +5033,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
         m_Mode: 3
         m_Arguments:
@@ -5271,7 +5163,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: Connect4Setup
         m_Mode: 1
         m_Arguments:
@@ -5557,7 +5449,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: setChipMul
         m_Mode: 3
         m_Arguments:
@@ -5842,19 +5734,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: TicTacToeButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5901,6 +5782,88 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1962791956}
   m_CullTransparentMesh: 0
+--- !u!1 &1982467317
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1982467319}
+  - component: {fileID: 1982467318}
+  m_Layer: 0
+  m_Name: Connect4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1982467318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982467317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11a8374f46cf1b44b76028058c42388, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTurn: 0
+  leagueChoice: 0
+  turnCount: 0
+  currBet: 0
+  AIChips: 0
+  AIWins: 0
+  PlayerChips: 0
+  PlayerWins: 0
+  ties: 0
+  chip_mul: 0
+  playerIcon:
+  - {fileID: 21300000, guid: 527ddf133d0432149a64cc6e6d6b0eba, type: 3}
+  - {fileID: 21300000, guid: ba2c9f171fbba5149a774e17fb713fbb, type: 3}
+  connectFourSpace:
+  - {fileID: 756698880}
+  - {fileID: 244451360}
+  - {fileID: 1032016001}
+  - {fileID: 759016054}
+  - {fileID: 1962791958}
+  - {fileID: 1011096496}
+  - {fileID: 2117831671}
+  - {fileID: 958192769}
+  - {fileID: 496314831}
+  - {fileID: 2082043038}
+  - {fileID: 1391620609}
+  - {fileID: 1567952681}
+  - {fileID: 1649816891}
+  - {fileID: 1633088486}
+  - {fileID: 482840648}
+  - {fileID: 1125101120}
+  - {fileID: 2077709260}
+  - {fileID: 818661100}
+  - {fileID: 2054643336}
+  - {fileID: 780899358}
+  - {fileID: 1175367259}
+  - {fileID: 554949207}
+  - {fileID: 594711333}
+  - {fileID: 1722267484}
+  - {fileID: 800563020}
+--- !u!4 &1982467319
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982467317}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 613.72314, y: 244.59616, z: -86.53731}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2006086546
 GameObject:
   m_ObjectHideFlags: 0
@@ -6060,7 +6023,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
         m_Mode: 3
         m_Arguments:
@@ -6345,7 +6308,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
         m_Mode: 3
         m_Arguments:
@@ -6474,7 +6437,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
         m_Mode: 3
         m_Arguments:
@@ -6603,19 +6566,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 113001863}
+      - m_Target: {fileID: 1982467318}
         m_MethodName: ConnectFourSpace
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 6
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: TicTacToeButton
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

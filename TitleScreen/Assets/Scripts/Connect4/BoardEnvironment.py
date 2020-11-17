@@ -31,7 +31,7 @@ class BoardEnvironment:
 	def select_piece(self, choice, turn):
 		self.board[choice] = turn
 		self.turn = 'X' if (turn == 'O') else 'O'
-	def available_actions(self):
+	def available_actions(self, first):
 		movelist = []
 		for i in range(5):
 			if self.board[i] == '-':

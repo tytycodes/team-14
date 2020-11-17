@@ -312,7 +312,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 425732720}
+      - m_Target: {fileID: 442655601}
         m_MethodName: CallBet
         m_Mode: 1
         m_Arguments:
@@ -442,7 +442,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 425732720}
+      - m_Target: {fileID: 442655601}
         m_MethodName: setChipMul
         m_Mode: 3
         m_Arguments:
@@ -572,7 +572,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 425732720}
+      - m_Target: {fileID: 442655601}
         m_MethodName: setChipMul
         m_Mode: 3
         m_Arguments:
@@ -1112,6 +1112,72 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &442655600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 442655602}
+  - component: {fileID: 442655601}
+  m_Layer: 0
+  m_Name: TicTacToe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &442655601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442655600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcc7a846c603fa049bff6d5426ede754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTurn: 0
+  leagueChoice: 0
+  turnCount: 0
+  currBet: 0
+  AIChips: 0
+  AIWins: 0
+  PlayerChips: 0
+  PlayerWins: 0
+  ties: 0
+  chip_mul: 0
+  playerIcon:
+  - {fileID: 21300000, guid: a08b6403b90cec448bf96f614824b18d, type: 3}
+  - {fileID: 21300000, guid: 8481ade4001d441488c3abd4083e4958, type: 3}
+  ticTacToeSpace:
+  - {fileID: 940877565}
+  - {fileID: 1306792108}
+  - {fileID: 1378374223}
+  - {fileID: 1042049007}
+  - {fileID: 1048999563}
+  - {fileID: 1660249294}
+  - {fileID: 1346694168}
+  - {fileID: 2123856724}
+  - {fileID: 1167901208}
+--- !u!4 &442655602
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442655600}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 613.72314, y: 244.59616, z: -86.53731}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &475922671
 GameObject:
   m_ObjectHideFlags: 0
@@ -1632,7 +1698,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 425732720}
+      - m_Target: {fileID: 442655601}
         m_MethodName: TicTacToeSetup
         m_Mode: 1
         m_Arguments:
@@ -1995,7 +2061,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 425732720}
+      - m_Target: {fileID: 442655601}
         m_MethodName: TicTacToeButton
         m_Mode: 3
         m_Arguments:
@@ -2124,7 +2190,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 425732720}
+      - m_Target: {fileID: 442655601}
         m_MethodName: TicTacToeButton
         m_Mode: 3
         m_Arguments:
@@ -2253,7 +2319,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 425732720}
+      - m_Target: {fileID: 442655601}
         m_MethodName: TicTacToeButton
         m_Mode: 3
         m_Arguments:
@@ -2382,7 +2448,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 425732720}
+      - m_Target: {fileID: 442655601}
         m_MethodName: TicTacToeButton
         m_Mode: 3
         m_Arguments:
@@ -2512,7 +2578,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 425732720}
+      - m_Target: {fileID: 442655601}
         m_MethodName: setChipMul
         m_Mode: 3
         m_Arguments:
@@ -2719,7 +2785,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 425732720}
+      - m_Target: {fileID: 442655601}
         m_MethodName: TicTacToeButton
         m_Mode: 3
         m_Arguments:
@@ -2848,7 +2914,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 425732720}
+      - m_Target: {fileID: 442655601}
         m_MethodName: TicTacToeButton
         m_Mode: 3
         m_Arguments:
@@ -3051,7 +3117,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 425732720}
+      - m_Target: {fileID: 442655601}
         m_MethodName: TicTacToeButton
         m_Mode: 3
         m_Arguments:
@@ -3246,7 +3312,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 425732720}
+      - m_Target: {fileID: 442655601}
         m_MethodName: TicTacToeButton
         m_Mode: 3
         m_Arguments:
@@ -3376,7 +3442,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 425732720}
+      - m_Target: {fileID: 442655601}
         m_MethodName: NewTTTLeagueGame
         m_Mode: 1
         m_Arguments:
@@ -4291,7 +4357,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 425732720}
+      - m_Target: {fileID: 442655601}
         m_MethodName: TicTacToeButton
         m_Mode: 3
         m_Arguments:

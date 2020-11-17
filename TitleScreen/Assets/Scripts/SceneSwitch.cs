@@ -19,13 +19,6 @@ public class SceneSwitch : MonoBehaviour
             return;
         }
 
-        //League mode for Connect4
-        if(Controller.getGame() == 1 && Controller.getGameMode() == 1)
-        {
-            UnityEngine.Debug.Log("Not currently implemented");
-            return;
-        }
-
         //Use Controller.getGame() to load the scene for the corresponding game
         string SceneName = "";
         switch (Controller.getGame())
