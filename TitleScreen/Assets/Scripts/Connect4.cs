@@ -155,7 +155,7 @@ public class Connect4 : MonoBehaviour
         ICollection<string> searchPaths = engine.GetSearchPaths();
 
         //Path to the folder of Agent and BoardEnvironment
-        searchPaths.Add(Application.dataPath + @"\Scripts\Connect4\");
+        searchPaths.Add(Application.dataPath + @"\Connect4\");
         //Path to the Python standard library
         searchPaths.Add(Application.dataPath + @"\Plugins\Lib\");
         engine.SetSearchPaths(searchPaths);
@@ -165,19 +165,19 @@ public class Connect4 : MonoBehaviour
         switch (difficulty)
         {
             case 0:
-                diff = @"\Scripts\Connect4\easy.txt";
+                diff = @"\Connect4\easy.txt";
                 break;
             case 1:
-                diff = @"\Scripts\Connect4\medium.txt";
+                diff = @"\Connect4\medium.txt";
                 break;
             case 2:
-                diff = @"\Scripts\Connect4\hard.txt";
+                diff = @"\Connect4\hard.txt";
                 break;
         }
 
         //load in the python scripts
-        dynamic tempagent = engine.ExecuteFile(Application.dataPath + @"\Scripts\Connect4\Agent.py");
-        dynamic tempboard = engine.ExecuteFile(Application.dataPath + @"\Scripts\Connect4\BoardEnvironment.py");
+        dynamic tempagent = engine.ExecuteFile(Application.dataPath + @"\Connect4\Agent.py");
+        dynamic tempboard = engine.ExecuteFile(Application.dataPath + @"\Connect4\BoardEnvironment.py");
         Board = tempboard.BoardEnvironment();
         Agent = tempagent.Agent(Board, Application.dataPath + diff);
         Connect4Setup();
@@ -221,16 +221,16 @@ public class Connect4 : MonoBehaviour
         ICollection<string> searchPaths = engine.GetSearchPaths();
 
         //Path to the folder of Agent and BoardEnvironment
-        searchPaths.Add(Application.dataPath + @"\Scripts\Connect4\");
+        searchPaths.Add(Application.dataPath + @"\Connect4\");
         //Path to the Python standard library
         searchPaths.Add(Application.dataPath + @"\Plugins\Lib\");
         engine.SetSearchPaths(searchPaths);
 
         //load in the python scripts
-        dynamic tempagent = engine.ExecuteFile(Application.dataPath + @"\Scripts\Connect4\Agent.py");
-        dynamic tempboard = engine.ExecuteFile(Application.dataPath + @"\Scripts\Connect4\BoardEnvironment.py");
-        dynamic templeague = engine.ExecuteFile(Application.dataPath + @"\Scripts\Connect4\LeagueEnvironment.py");
-        dynamic temputil = engine.ExecuteFile(Application.dataPath + @"\Scripts\Connect4\LeagueUtil.py");
+        dynamic tempagent = engine.ExecuteFile(Application.dataPath + @"\Connect4\Agent.py");
+        dynamic tempboard = engine.ExecuteFile(Application.dataPath + @"\Connect4\BoardEnvironment.py");
+        dynamic templeague = engine.ExecuteFile(Application.dataPath + @"\Connect4\LeagueEnvironment.py");
+        dynamic temputil = engine.ExecuteFile(Application.dataPath + @"\Connect4\LeagueUtil.py");
 
         Board = tempboard.BoardEnvironment();
         League = templeague.LeagueEnvironment(Board);

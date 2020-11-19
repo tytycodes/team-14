@@ -795,31 +795,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fc8eebab9d1cb0418064c007ee16349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTurn: 0
-  playerTurn2: 0
-  leagueChoice: 0
-  turnCount: 0
-  currBet: 0
-  AIChips: 0
-  AIWins: 0
-  PlayerChips: 0
-  PlayerWins: 0
-  ties: 0
-  chip_mul: 0
-  playerIcon:
-  - {fileID: 0}
-  - {fileID: 0}
-  playerIcon2: []
-  ticTacToeSpace:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   gameButton:
   - {fileID: 724809965}
   - {fileID: 202956321}
@@ -831,7 +806,6 @@ MonoBehaviour:
   modeButton:
   - {fileID: 73355969}
   - {fileID: 295701826}
-  connectFourSpace: []
 --- !u!4 &371173079
 Transform:
   m_ObjectHideFlags: 0
@@ -1119,7 +1093,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00016785, y: 0}
+  m_AnchoredPosition: {x: -0.00018310547, y: 0}
   m_SizeDelta: {x: 0.00024414062, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &584498116

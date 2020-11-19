@@ -155,7 +155,7 @@ public class TicTacToe : MonoBehaviour
         ICollection<string> searchPaths = engine.GetSearchPaths();
 
         //Path to the folder of Agent and BoardEnvironment
-        searchPaths.Add(Application.dataPath + @"\Scripts\TicTacToe\");
+        searchPaths.Add(Application.dataPath + @"\Resources\TicTacToe\");
         //Path to the Python standard library
         searchPaths.Add(Application.dataPath + @"\Plugins\Lib\");
         engine.SetSearchPaths(searchPaths);
@@ -165,19 +165,19 @@ public class TicTacToe : MonoBehaviour
         switch (difficulty)
         {
             case 0:
-                diff = @"\Scripts\TicTacToe\easy.txt";
+                diff = @"\Resources\TicTacToe\easy.txt";
                 break;
             case 1:
-                diff = @"\Scripts\TicTacToe\medium.txt";
+                diff = @"\Resources\TicTacToe\medium.txt";
                 break;
             case 2:
-                diff = @"\Scripts\TicTacToe\hard.txt";
+                diff = @"\Resources\TicTacToe\hard.txt";
                 break;
         }
 
         //load in the python scripts
-        dynamic tempagent = engine.ExecuteFile(Application.dataPath + @"\Scripts\TicTacToe\Agent.py");
-        dynamic tempboard = engine.ExecuteFile(Application.dataPath + @"\Scripts\TicTacToe\BoardEnvironment.py");
+        dynamic tempagent = engine.ExecuteFile(Application.dataPath + @"\Resources\TicTacToe\Agent.py");
+        dynamic tempboard = engine.ExecuteFile(Application.dataPath + @"\Resources\TicTacToe\BoardEnvironment.py");
         Board = tempboard.BoardEnvironment();
         Agent = tempagent.Agent(Board, Application.dataPath + diff);
         TicTacToeSetup();
@@ -231,16 +231,16 @@ public class TicTacToe : MonoBehaviour
         ICollection<string> searchPaths = engine.GetSearchPaths();
 
         //Path to the folder of Agent and BoardEnvironment
-        searchPaths.Add(Application.dataPath + @"\Scripts\TicTacToe\");
+        searchPaths.Add(Application.dataPath + @"\Resources\TicTacToe\");
         //Path to the Python standard library
         searchPaths.Add(Application.dataPath + @"\Plugins\Lib\");
         engine.SetSearchPaths(searchPaths);
 
         //load in the python scripts
-        dynamic tempagent = engine.ExecuteFile(Application.dataPath + @"\Scripts\TicTacToe\Agent.py");
-        dynamic tempboard = engine.ExecuteFile(Application.dataPath + @"\Scripts\TicTacToe\BoardEnvironment.py");
-        dynamic templeague = engine.ExecuteFile(Application.dataPath + @"\Scripts\TicTacToe\LeagueEnvironment.py");
-        dynamic temputil = engine.ExecuteFile(Application.dataPath + @"\Scripts\TicTacToe\LeagueUtil.py");
+        dynamic tempagent = engine.ExecuteFile(Application.dataPath + @"\Resources\TicTacToe\Agent.py");
+        dynamic tempboard = engine.ExecuteFile(Application.dataPath + @"\Resources\TicTacToe\BoardEnvironment.py");
+        dynamic templeague = engine.ExecuteFile(Application.dataPath + @"\Resources\TicTacToe\LeagueEnvironment.py");
+        dynamic temputil = engine.ExecuteFile(Application.dataPath + @"\Resources\TicTacToe\LeagueUtil.py");
 
         Board = tempboard.BoardEnvironment();
         League = templeague.LeagueEnvironment(Board);
