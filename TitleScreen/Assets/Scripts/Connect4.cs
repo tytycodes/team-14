@@ -57,6 +57,8 @@ public class Connect4 : MonoBehaviour
     private GameObject Quit_Button;
     private GameObject Continue_Button;
 
+    private Stopwatch stopwatch;
+
     //Set singleton instance and initialize all buttons
     void Awake()
     {
@@ -69,6 +71,7 @@ public class Connect4 : MonoBehaviour
         Reset_Button = GameObject.Find("Button_Reset");
         Quit_Button = GameObject.Find("Button_Quit");
         Continue_Button = GameObject.Find("Button_Continue");
+        HideButtons();
     }
 
     //display league-level buttons depending on if you're calling a bet or increasing a bet
@@ -155,7 +158,7 @@ public class Connect4 : MonoBehaviour
         ICollection<string> searchPaths = engine.GetSearchPaths();
 
         //Path to the folder of Agent and BoardEnvironment
-        searchPaths.Add(Application.dataPath + @"\Connect4\");
+        searchPaths.Add(Application.dataPath + @"\Resources\Connect4\");
         //Path to the Python standard library
         searchPaths.Add(Application.dataPath + @"\Plugins\Lib\");
         engine.SetSearchPaths(searchPaths);
@@ -165,19 +168,19 @@ public class Connect4 : MonoBehaviour
         switch (difficulty)
         {
             case 0:
-                diff = @"\Connect4\easy.txt";
+                diff = @"\Resources\Connect4\easy.txt";
                 break;
             case 1:
-                diff = @"\Connect4\medium.txt";
+                diff = @"\Resources\Connect4\medium.txt";
                 break;
             case 2:
-                diff = @"\Connect4\hard.txt";
+                diff = @"\Resources\Connect4\hard.txt";
                 break;
         }
 
         //load in the python scripts
-        dynamic tempagent = engine.ExecuteFile(Application.dataPath + @"\Connect4\Agent.py");
-        dynamic tempboard = engine.ExecuteFile(Application.dataPath + @"\Connect4\BoardEnvironment.py");
+        dynamic tempagent = engine.ExecuteFile(Application.dataPath + @"\Resources\Connect4\Agent.py");
+        dynamic tempboard = engine.ExecuteFile(Application.dataPath + @"\Resources\Connect4\BoardEnvironment.py");
         Board = tempboard.BoardEnvironment();
         Agent = tempagent.Agent(Board, Application.dataPath + diff);
         Connect4Setup();
@@ -221,16 +224,16 @@ public class Connect4 : MonoBehaviour
         ICollection<string> searchPaths = engine.GetSearchPaths();
 
         //Path to the folder of Agent and BoardEnvironment
-        searchPaths.Add(Application.dataPath + @"\Connect4\");
+        searchPaths.Add(Application.dataPath + @"\Resources\Connect4\");
         //Path to the Python standard library
         searchPaths.Add(Application.dataPath + @"\Plugins\Lib\");
         engine.SetSearchPaths(searchPaths);
 
         //load in the python scripts
-        dynamic tempagent = engine.ExecuteFile(Application.dataPath + @"\Connect4\Agent.py");
-        dynamic tempboard = engine.ExecuteFile(Application.dataPath + @"\Connect4\BoardEnvironment.py");
-        dynamic templeague = engine.ExecuteFile(Application.dataPath + @"\Connect4\LeagueEnvironment.py");
-        dynamic temputil = engine.ExecuteFile(Application.dataPath + @"\Connect4\LeagueUtil.py");
+        dynamic tempagent = engine.ExecuteFile(Application.dataPath + @"\Resources\Connect4\Agent.py");
+        dynamic tempboard = engine.ExecuteFile(Application.dataPath + @"\Resources\Connect4\BoardEnvironment.py");
+        dynamic templeague = engine.ExecuteFile(Application.dataPath + @"\Resources\Connect4\LeagueEnvironment.py");
+        dynamic temputil = engine.ExecuteFile(Application.dataPath + @"\Resources\Connect4\LeagueUtil.py");
 
         Board = tempboard.BoardEnvironment();
         League = templeague.LeagueEnvironment(Board);

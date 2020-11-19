@@ -69,6 +69,7 @@ public class TicTacToe : MonoBehaviour
         Reset_Button = GameObject.Find("Button_Reset");
         Quit_Button = GameObject.Find("Button_Quit");
         Continue_Button = GameObject.Find("Button_Continue");
+        HideButtons();
     }
 
     //display league-level buttons depending on if you're calling a bet or increasing a bet
