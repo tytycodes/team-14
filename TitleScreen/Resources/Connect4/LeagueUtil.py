@@ -61,3 +61,6 @@ class LeagueUtil:
 		
 	def get_league_agent(self, index):
 		return self.league_agents[index]
+		
+	def get_agent_name(self, index):
+		return self.player_names[index]

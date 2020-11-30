@@ -8,6 +8,7 @@ using IronPython.Hosting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Connect4 : MonoBehaviour
 {
@@ -45,8 +46,12 @@ public class Connect4 : MonoBehaviour
     private dynamic Util;
     private UnityEngine.UI.Text pChips;
     private UnityEngine.UI.Text aChips;
+    private GameObject ContextMessage;
+    private TextMeshProUGUI PairedAI;
+    private string CurrName;
     public Sprite[] playerIcon;
     public UnityEngine.UI.Button[] connectFourSpace;
+    static Dictionary<string, string> AgentNames;
 
     private GameObject Grid;
     private GameObject Call_Button;
@@ -71,6 +76,15 @@ public class Connect4 : MonoBehaviour
         Reset_Button = GameObject.Find("Button_Reset");
         Quit_Button = GameObject.Find("Button_Quit");
         Continue_Button = GameObject.Find("Button_Continue");
+        ContextMessage = GameObject.Find("ContextMessage");
+        PairedAI = GameObject.Find("PairedAI").GetComponent<TextMeshProUGUI>();
+        AgentNames = new Dictionary<string, string>
+        {
+            {"learning strategy and tactics", "high strategy and tactics"},
+            {"learning tactics only", "low strategy and high tactics"},
+            {"learning strategy only", "high strategy and low tactics"},
+            {"no learning", "low strategy and tactics"}
+        };
         HideButtons();
     }
 
@@ -79,6 +93,7 @@ public class Connect4 : MonoBehaviour
     {
         //Hide grid and activate/deactivate proper buttons
         Grid.SetActive(false);
+        Continue_Button.SetActive(false);
         if (turn)
         {
             Call_Button.SetActive(false);
@@ -189,6 +204,8 @@ public class Connect4 : MonoBehaviour
     //Connect4Setup point that will allow single match resets more easily
     public void Connect4Setup()
     {
+        ContextMessage.SetActive(false);
+        PairedAI.text = CurrName;
         Board.reset();
 
         //explicitly set the board
@@ -267,7 +284,13 @@ public class Connect4 : MonoBehaviour
             switch (ListIndex)
             {
                 case 0:
-                    UnityEngine.Debug.Log("New AI at index " + item);
+                    //Get the name of the paired AI and display it to the screen using the prebuilt dictionary
+                    string temp = Util.get_agent_name(int.Parse(item));
+                    AgentNames.TryGetValue(temp, out CurrName);
+                    TextMeshProUGUI textmeshPro = ContextMessage.GetComponent<TextMeshProUGUI>();
+                    textmeshPro.text = "Paired AI is " + CurrName;
+                    PairedAI.text = "";
+                    ContextMessage.SetActive(true);
                     Agent = Util.get_board_agent(int.Parse(item));
                     LeagueAgent = Util.get_league_agent(int.Parse(item));
                     break;
@@ -287,11 +310,14 @@ public class Connect4 : MonoBehaviour
         if (!leagueChoice)
         {
             string choice = LeagueAgent.select_action(!leagueChoice);
+
+            TextMeshProUGUI textmeshPro = ContextMessage.GetComponent<TextMeshProUGUI>();
+            textmeshPro.text = "AI chose " + choice;
+            ContextMessage.SetActive(true);
             //Choices available to the AI if it chooses first
             switch (choice)
             {
                 case "quit":
-                    UnityEngine.Debug.Log("AI chose " + choice);
                     quit = true;
                     ContinueGame();
                     break;
@@ -306,7 +332,6 @@ public class Connect4 : MonoBehaviour
                     break;
                 default: break;
             }
-            UnityEngine.Debug.Log("AI chose " + choice);
         }
         //Show buttons if the AI didn't quit
         if (!quit)
@@ -337,13 +362,15 @@ public class Connect4 : MonoBehaviour
         playerTurn++;
         playerTurn %= 2;
 
+        TextMeshProUGUI textmeshPro = ContextMessage.GetComponent<TextMeshProUGUI>();
         //Check for a winner
         if (Board.winner() != "")
         {
             //Player has won
             if (playerTurn == 1)
             {
-                UnityEngine.Debug.Log("Player wins!");
+                textmeshPro.text = "Player wins!";
+                ContextMessage.SetActive(true);
                 //Make adjustments to league variables if applicable
                 if (League != null)
                 {
@@ -357,7 +384,8 @@ public class Connect4 : MonoBehaviour
             //AI has won
             else
             {
-                UnityEngine.Debug.Log("AI wins!");
+                textmeshPro.text = "AI wins!";
+                ContextMessage.SetActive(true);
                 //Make adjustments to league variables if applicable
                 if (League != null)
                 {
@@ -389,7 +417,9 @@ public class Connect4 : MonoBehaviour
                 //Someone's chips ran out
                 if (AIChips <= 0 || PlayerChips <= 0)
                 {
-                    UnityEngine.Debug.Log("Chips ran out");
+                    if (AIChips <= 0) textmeshPro.text = "AI ran out of chips.";
+                    else textmeshPro.text = "Player ran out of chips.";
+                    ContextMessage.SetActive(true);
                     ContinueGame();
                 }
                 //No one's chips ran out
@@ -404,7 +434,8 @@ public class Connect4 : MonoBehaviour
         //Check for a tie
         else if (Board.is_full())
         {
-            UnityEngine.Debug.Log("Tie!");
+            textmeshPro.text = "Tie game!";
+            ContextMessage.SetActive(true);
             //Make adjustments to league variables if applicable
             if (League != null)
             {
@@ -436,7 +467,11 @@ public class Connect4 : MonoBehaviour
     {
         chip_mul = cellNumber;
         string choice = LeagueAgent.select_action(!leagueChoice);
-        UnityEngine.Debug.Log("AI chose " + choice);
+
+        TextMeshProUGUI textmeshPro = ContextMessage.GetComponent<TextMeshProUGUI>();
+        textmeshPro.text = "AI chose " + choice;
+        ContextMessage.SetActive(true);
+
         if (choice == "quit")
         {
             ContinueGame();

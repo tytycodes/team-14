@@ -35,11 +35,8 @@ public class GameController : MonoBehaviour
     public UnityEngine.UI.Button[] difficultyButton;
     public UnityEngine.UI.Button[] modeButton;
 
-    private GameObject E;
     private GameObject E_Button;
-    private GameObject M;
     private GameObject M_Button;
-    private GameObject H;
     private GameObject H_Button;
     private GameObject Grid;
     private GameObject Call_Button;
@@ -59,11 +56,8 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        E = GameObject.Find("E");
         E_Button = GameObject.Find("E_Button");
-        M = GameObject.Find("M");
         M_Button = GameObject.Find("M_Button");
-        H = GameObject.Find("H");
         H_Button = GameObject.Find("H_Button");
     }
 
@@ -163,21 +157,15 @@ public class GameController : MonoBehaviour
         //Disable the difficulty selections if league mode is selected
         if(cellNumber == 1)
         {
-            E.SetActive(false);
             E_Button.SetActive(false);
-            M.SetActive(false);
             M_Button.SetActive(false);
-            H.SetActive(false);
             H_Button.SetActive(false);
         }
         //Enable the difficulty selections if single match mode is selected
         else
         {
-            E.SetActive(true);
             E_Button.SetActive(true);
-            M.SetActive(true);
             M_Button.SetActive(true);
-            H.SetActive(true);
             H_Button.SetActive(true);
         }
     }
