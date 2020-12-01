@@ -4,7 +4,6 @@ import os
 
 class LeagueUtil:
 	def __init__(self, board, league):
-		self.path = os.getcwd()
 		self.player_names = []
 		self.board_agents = []
 		self.league_agents = []
@@ -12,19 +11,19 @@ class LeagueUtil:
 		#store all AI available for play during league play that will be randomly selected
 		self.player_names.append('learning strategy and tactics')
 		self.board_agents.append(Agent.Agent(board, self.select_difficulty(), 'max'))
-		self.league_agents.append(Agent.Agent(league, self.path + '\TitleScreen_Data\Resources\TicTacToe\league.txt', 'max'))
+		self.league_agents.append(Agent.Agent(league, os.getcwd() + r'\TitleScreen_Data\Resources\TicTacToe\league.txt', 'max'))
 
 		self.player_names.append('learning tactics only')
 		self.board_agents.append(Agent.Agent(board, self.select_difficulty(), 'max'))
-		self.league_agents.append(Agent.Agent(league, self.path + '\TitleScreen_Data\Resources\TicTacToe\league.txt', 'random'))
+		self.league_agents.append(Agent.Agent(league, os.getcwd() + r'\TitleScreen_Data\Resources\TicTacToe\league.txt', 'random'))
 
 		self.player_names.append('learning strategy only')
 		self.board_agents.append(Agent.Agent(board, self.select_difficulty(), 'random'))
-		self.league_agents.append(Agent.Agent(league, self.path + '\TitleScreen_Data\Resources\TicTacToe\league.txt', 'max'))
+		self.league_agents.append(Agent.Agent(league, os.getcwd() + r'\TitleScreen_Data\Resources\TicTacToe\league.txt', 'max'))
 
 		self.player_names.append('no learning')
 		self.board_agents.append(Agent.Agent(board, self.select_difficulty(), 'random'))
-		self.league_agents.append(Agent.Agent(league, self.path + '\TitleScreen_Data\Resources\TicTacToe\league.txt', 'random'))
+		self.league_agents.append(Agent.Agent(league, os.getcwd() + r'\TitleScreen_Data\Resources\TicTacToe\league.txt', 'random'))
 
 	def get_names(self):
 		return self.player_names
@@ -37,9 +36,9 @@ class LeagueUtil:
 		
 	#randomly select the difficulty of the generated AI
 	def select_difficulty(self):
-		diffdict = {1 : self.path + r'\TitleScreen_Data\Resources\TicTacToe\easy.txt',
-                2 : self.path + r'\TitleScreen_Data\Resources\TicTacToe\medium.txt',
-                3 : self.path + r'\TitleScreen_Data\Resources\TicTacToe\hard.txt'}
+		diffdict = {1 : os.getcwd() + r'\TitleScreen_Data\Resources\TicTacToe\easy.txt',
+                2 : os.getcwd() + r'\TitleScreen_Data\Resources\TicTacToe\medium.txt',
+                3 : os.getcwd() + r'\TitleScreen_Data\Resources\TicTacToe\hard.txt'}
 		return diffdict[rand.randint(1,3)]
 		
 	def get_board_agent(self, index):
@@ -47,3 +46,6 @@ class LeagueUtil:
 		
 	def get_league_agent(self, index):
 		return self.league_agents[index]
+		
+	def get_agent_name(self, index):
+		return self.player_names[index]

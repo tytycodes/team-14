@@ -11,7 +11,7 @@ class LeagueUtil:
 		#pre-compute the league Q table to be able to send into functions later without calculating it again.
 		#significantly reduces load time
 		LeagueQ = ''
-		with open('Assets\Resources\Connect4\league.txt', 'r') as f:
+		with open('\Resources\Connect4\league.txt', 'r') as f:
 			for i in f.readlines():
 				LeagueQ = i
 		LeagueQ = eval(LeagueQ)
@@ -51,9 +51,9 @@ class LeagueUtil:
 		
 	#randomly select the difficulty of board agents
 	def select_difficulty(self):
-		diffdict = {1 : r'Assets\Resources\Connect4\easy.txt',
-                2 : r'Assets\Resources\Connect4\medium.txt',
-                3 : r'Assets\Resources\Connect4\hard.txt'}
+		diffdict = {1 : r'\Resources\Connect4\easy.txt',
+                2 : r'\Resources\Connect4\medium.txt',
+                3 : r'\Resources\Connect4\hard.txt'}
 		return diffdict[rand.randint(1,3)]
 		
 	def get_board_agent(self, index):

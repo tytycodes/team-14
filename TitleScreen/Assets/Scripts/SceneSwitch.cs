@@ -2,15 +2,23 @@
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class SceneSwitch : MonoBehaviour
 {
     GameController Controller;
+    GameObject MainCanvas;
+    GameObject LoadingCanvas;
+    AsyncOperation loadingOperation;
+    Slider progressBar;
 
     public void playGame()
     {
         Controller = GameObject.Find("GameController").GetComponent<GameController>();
+        MainCanvas = GameObject.Find("MainCanvas");
+        LoadingCanvas = GameObject.Find("LoadingCanvas");
+        progressBar = GameObject.Find("LoadingBar").GetComponent<Slider>();
         
         //Check if the game and or difficulty are selected
         if(Controller.getGame() == -1 || (Controller.getDifficulty() == -1 && Controller.getGameMode() == 0))
@@ -28,6 +36,16 @@ public class SceneSwitch : MonoBehaviour
             case (1):   SceneName = "Connect4";
                         break;
         }
-        SceneManager.LoadScene(SceneName);
+        MainCanvas.SetActive(false);
+        LoadingCanvas.SetActive(true);
+        loadingOperation = SceneManager.LoadSceneAsync(SceneName);
+    }
+
+    void Update()
+    {
+        if(loadingOperation != null)
+        {
+            progressBar.value = Mathf.Clamp01(loadingOperation.progress / 0.9f);
+        }
     }
 }
