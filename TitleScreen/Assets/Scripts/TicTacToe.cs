@@ -129,6 +129,10 @@ public class TicTacToe : MonoBehaviour
         for (int i = 0; i < 9; i++)
         {
             ticTacToeSpace[i] = GameObject.Find(i.ToString()).GetComponent<Button>();
+            //Change color multiplier back to 1 so that highlights look normal
+            ColorBlock col = ticTacToeSpace[i].colors;
+            col.colorMultiplier = 1;
+            ticTacToeSpace[i].colors = col;
         }
     }
 
@@ -351,6 +355,11 @@ public class TicTacToe : MonoBehaviour
     {
         //Select space
         ticTacToeSpace[cellNumber].image.sprite = playerIcon[playerTurn];
+        //Change color multiplier to 5 so that board pieces aren't transparent
+        ColorBlock col = ticTacToeSpace[cellNumber].colors;
+        col.colorMultiplier = 5;
+        ticTacToeSpace[cellNumber].colors = col;
+
         ticTacToeSpace[cellNumber].interactable = false;
 
         //Set next player's turn
