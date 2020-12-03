@@ -83,7 +83,7 @@ public class GameController : MonoBehaviour
                 //Start Connect4
                 GameObject.Find("Connect4").GetComponent<Connect4>().C4Init(gamemode, difficulty);
                 break;
-            case ("SampleScene"):
+            case ("MainMenu"):
                 //Set buttons to be automatically selected
                 gameButton[0].interactable = false;
                 game = 0;
