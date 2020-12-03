@@ -1,6 +1,7 @@
 import Agent
 import random as rand
 from collections import defaultdict
+import os
 
 class LeagueUtil:
 	def __init__(self, board, league):
@@ -11,7 +12,7 @@ class LeagueUtil:
 		#pre-compute the league Q table to be able to send into functions later without calculating it again.
 		#significantly reduces load time
 		LeagueQ = ''
-		with open('\Resources\Connect4\league.txt', 'r') as f:
+		with open(os.getcwd() + r'\TitleScreen_Data\Resources\Connect4\league.txt', 'r') as f:
 			for i in f.readlines():
 				LeagueQ = i
 		LeagueQ = eval(LeagueQ)
@@ -51,9 +52,9 @@ class LeagueUtil:
 		
 	#randomly select the difficulty of board agents
 	def select_difficulty(self):
-		diffdict = {1 : r'\Resources\Connect4\easy.txt',
-                2 : r'\Resources\Connect4\medium.txt',
-                3 : r'\Resources\Connect4\hard.txt'}
+		diffdict = {1 : os.getcwd() + r'\TitleScreen_Data\Resources\Connect4\easy.txt',
+                2 : os.getcwd() + r'\TitleScreen_Data\Resources\Connect4\medium.txt',
+                3 : os.getcwd() + r'\TitleScreen_Data\Resources\Connect4\hard.txt'}
 		return diffdict[rand.randint(1,3)]
 		
 	def get_board_agent(self, index):
