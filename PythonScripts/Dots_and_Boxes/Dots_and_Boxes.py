@@ -125,7 +125,7 @@ class BoardEnvironment:
     # %%
 
 
-
+'''
 class Agent:
     """ this class is a generic Q-Learning reinforcement learning agent for discrete states and fixed actions
     represented as strings"""
@@ -172,10 +172,91 @@ def select_difficulty():
         x = int(input())
 
     return diffdict[x]
+'''
 
+
+class Agent:
+    """ this class is a generic Q-Learning reinforcement learning agent for discrete states and fixed actions
+    represented as strings"""
+    def __init__(self, environment, policy = 'max', learning_rate = 0.5, discount_factor = 0.95, epsilon = 0.2):
+        if policy in ['max', 'random', 'epsilon']:
+          self.policy = policy
+        else:
+          raise InputError(policy, ' is not an available policy')
+        self.learning_rate = learning_rate
+        self.discount_factor = discount_factor
+        self.Q = defaultdict(lambda: 0.0) # stores (state, action) value tuples as keys
+        self.environment = environment
+        self.epsilon = epsilon # Fraction of time making a random choice for epsilon policy
+        self.reset_past()
+
+    def reset_past(self):
+      self.past_action = None
+      self.past_state = None
+
+    def select_action(self):
+      available_actions = self.environment.available_actions()
+      if (self.policy == 'random') or (self.policy == 'epsilon' and random.random() < self.epsilon):
+        choice = random.choice(available_actions)
+      else: #self.policy == 'max' or it's an epsilon policy determined to pick the max
+        Q_vals = [self.Q[(self.environment.get_state(), x)] for x in available_actions]
+        #randomly pick one of the maximum values
+        max_val = max(Q_vals) # will often be 0 in the beginning
+        max_pos = [i for i, j in enumerate(Q_vals) if j == max_val]
+        max_indices = [available_actions[x] for x in max_pos]
+        choice = random.choice(max_indices)
+      self.past_state = self.environment.get_state()
+      self.past_action = choice
+      return choice
+
+    def reward(self, reward_value):
+        # finding the best expected reward
+        available_actions = self.environment.available_actions()
+        next_Q_vals = [self.Q[(self.environment.get_state(), x)] for x in available_actions]
+        max_next_Q = max(next_Q_vals) if next_Q_vals else 0 # will often be 0 in the beginning
+        td_target = reward_value + self.discount_factor * max_next_Q
+        reward_pred_error = td_target - self.Q[(self.past_state,self.past_action)]
+        if (self.past_state or self.past_action):
+          self.Q[(self.past_state,self.past_action)] += self.learning_rate * reward_pred_error
+
+
+import sys
+class RepeatedGames:
+    def __init__(self, environment, playerA, playerB):
+        self.environment = environment
+        self.playerA = playerA
+        self.playerB = playerB
+        self.reset_history()
+
+    def reset_history(self):
+        self.history = []
+
+    def play_game(self):
+        winner = self.environment.play_game()
+        if (winner == self.playerA):
+          self.history.append('A')
+        elif (winner == self.playerB):
+          self.history.append('B')
+        else:
+          self.history.append('-')
+
+    def play_games(self, games_to_play):
+        for i in range(games_to_play):
+            self.play_game()
+            sys.stdout.write("\r")
+            sys.stdout.write("{:2d} games played.".format(i))
+            sys.stdout.flush()
+        print(self.history[-games_to_play:].count('A'),'games won by player A')
+        print(self.history[-games_to_play:].count('B'),'games won by player B')
+        print(self.history[-games_to_play:].count('-'),'ties')
+        win_rate=self.history[-games_to_play:].count('A')/len(self.history[-games_to_play:])*100
+        print("Winning rate: {}".format(win_rate))
 
 
 board = BoardEnvironment()
-A = Agent(board, select_difficulty())
-board.set_players(A)
-board.play_game()
+A = Agent(board, 'max')
+B = Agent(board, 'random')
+board.set_players(A,B)
+
+tournament = RepeatedGames(board,A,B)
+tournament.play_games(100)
