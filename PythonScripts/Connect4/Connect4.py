@@ -98,7 +98,7 @@ class BoardEnvironment:
             x = int(input())
         print()
         choice = self.get_lowest_column(int(x) - 1)
-      # **********************************************
+      # *********************************************
 
 
 
