@@ -83,7 +83,8 @@ class BoardEnvironment:
     # returns the winning player or None if a tie
     self.reset()
     while (not self.is_full() ):
-      
+
+      # ************ HUMAN-PLAYABLE MODIFICATION
       if(self.current_player):
         choice = self.playerA.select_action(self.board)
       else:
@@ -97,6 +98,10 @@ class BoardEnvironment:
             x = int(input())
         print()
         choice = self.get_lowest_column(int(x) - 1)
+      # **********************************************
+
+
+
 
       self.board[choice] = self.turn # should check if valid
 
